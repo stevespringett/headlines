@@ -16,6 +16,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -67,7 +68,7 @@ public class HeaderSecurityFilter implements Filter {
   }
 
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc) throws IOException, ServletException {
-    injector.inject(response);
+    injector.inject(HttpServletResponse.class.cast(response));
     fc.doFilter(request, response);
   }
 

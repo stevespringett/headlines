@@ -1,7 +1,7 @@
 package com.sourceclear.headersecurity;
 
 import javax.annotation.concurrent.ThreadSafe;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -25,8 +25,14 @@ public class HeaderSecurityInjector {
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  public void inject(ServletResponse response) {
-    // Implement Me
+  public void inject(HttpServletResponse response) {
+    
+    // XContentType
+    if (config.getXContentTypeConfig().isEnabled()) {
+      response.setHeader("X-Content-Type-Options", "nosniff");
+    }
+    
+    
   }
   
   //------------------------ Implements:
