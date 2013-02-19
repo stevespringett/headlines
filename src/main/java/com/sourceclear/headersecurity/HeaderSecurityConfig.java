@@ -6,7 +6,7 @@ import javax.annotation.concurrent.Immutable;
  *
  */
 @Immutable
-public class HeaderSecurityConfig2 {
+public class HeaderSecurityConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
