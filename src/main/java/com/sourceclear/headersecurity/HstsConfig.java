@@ -6,23 +6,19 @@ import javax.annotation.concurrent.Immutable;
  *
  */
 @Immutable
-public class HeaderSecurityConfig {
+public class HstsConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+  private boolean enabled = true;
   
-  private XContentTypeConfig xContentType = new XContentTypeConfig();
+  private boolean includeSubdomains = true;
   
-  private XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
-  
-  private XssProtectionConfig xssProtection = new XssProtectionConfig();
-  
-  private HstsConfig hstsConfig = new HstsConfig();
-  
-  private String proxyHeader = "X-Forwarded-Proto";
+  private long maxAge = 31536000L;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
@@ -37,20 +33,25 @@ public class HeaderSecurityConfig {
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
-  
-  public XContentTypeConfig getXContentTypeConfig() {
-    return xContentType;
+
+  /**
+   * @return the enabled
+   */
+  public boolean isEnabled() {
+    return enabled;
   }
-  
-  public XFrameOptionsConfig getXFrameOptionsConfig() {
-    return xFrameOptions;
+
+  /**
+   * @return the includeSubdomains
+   */
+  public boolean includeSubdomains() {
+    return includeSubdomains;
   }
-  
-  public XssProtectionConfig getXssProtectionConfig() {
-    return xssProtection;
-  }
-  
-  public HstsConfig getHstsConfig() {
-    return hstsConfig;
+
+  /**
+   * @return the maxAge
+   */
+  public long getMaxAge() {
+    return maxAge;
   }
 }

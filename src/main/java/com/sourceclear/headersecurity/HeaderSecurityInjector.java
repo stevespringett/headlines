@@ -1,6 +1,7 @@
 package com.sourceclear.headersecurity;
 
 import javax.annotation.concurrent.ThreadSafe;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -25,8 +26,8 @@ public class HeaderSecurityInjector {
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  public void inject(HttpServletResponse response) {
-    
+  public void inject(HttpServletRequest request, HttpServletResponse response) {
+    System.out.println("Injecting secure headers");
     // XContentType
     if (config.getXContentTypeConfig().isEnabled()) {
       response.setHeader("X-Content-Type-Options", "nosniff");
@@ -40,6 +41,18 @@ public class HeaderSecurityInjector {
     // XssProtection
     response.setHeader("X-XSS-Protection", config.getXssProtectionConfig().isEnabled() ? "1" : "0");
     
+    // HSTS. This is only used for current HTTPS connections.
+    HstsConfig hsts = config.getHstsConfig();
+    System.out.println("X-Forwarded-Proto: " + request.getHeader("X-Forwarded-Proto"));
+    boolean secure = request.isSecure() | "https".equalsIgnoreCase(request.getHeader("X-Forwarded-Proto"));
+    if (secure) {
+      String header = "max-age=" + hsts.getMaxAge();
+      if (hsts.includeSubdomains()) {
+        header += "; includeSubdomains";
+      }
+      System.out.println("Setting Strict-Transport-Security to " + header);
+      response.setHeader("Strict-Transport-Security", header);
+    }
   }
   
   //------------------------ Implements:
