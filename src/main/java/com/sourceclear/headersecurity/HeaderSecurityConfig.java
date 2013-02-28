@@ -16,6 +16,8 @@ public class HeaderSecurityConfig {
   
   private XContentTypeConfig xContentType = new XContentTypeConfig();
   
+  private XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
+  
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -32,5 +34,9 @@ public class HeaderSecurityConfig {
   
   public XContentTypeConfig getXContentTypeConfig() {
     return xContentType;
+  }
+  
+  public XFrameOptionsConfig getXFrameOptionsConfig() {
+    return xFrameOptions;
   }
 }
