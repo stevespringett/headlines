@@ -1,25 +1,23 @@
 package com.sourceclear.headersecurity;
 
-import javax.annotation.concurrent.Immutable;
+import com.google.gson.Gson;
 
 /**
  *
  */
-@Immutable
-public class HeaderSecurityConfig {
+public class Test {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
+  public static void main(String[] args) {
+    HeaderSecurityConfig config = new HeaderSecurityConfig();
+    System.out.println(new Gson().toJson(config));
+  }
+  
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-  
-  private XContentTypeConfig xContentType = new XContentTypeConfig();
-  
-  private XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
-  
-  private XssProtectionConfig xssProtection = new XssProtectionConfig();
-  
+    
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -33,16 +31,4 @@ public class HeaderSecurityConfig {
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
-  
-  public XContentTypeConfig getXContentTypeConfig() {
-    return xContentType;
-  }
-  
-  public XFrameOptionsConfig getXFrameOptionsConfig() {
-    return xFrameOptions;
-  }
-  
-  public XssProtectionConfig getXssProtectionConfig() {
-    return xssProtection;
-  }
 }

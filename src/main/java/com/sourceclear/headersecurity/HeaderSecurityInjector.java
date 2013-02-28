@@ -37,6 +37,8 @@ public class HeaderSecurityInjector {
       response.setHeader("X-Frame-Options", config.getXFrameOptionsConfig().getValue());
     }
     
+    // XssProtection
+    response.setHeader("X-XSS-Protection", config.getXssProtectionConfig().isEnabled() ? "1" : "0");
     
   }
   

@@ -1,24 +1,17 @@
 package com.sourceclear.headersecurity;
 
-import javax.annotation.concurrent.Immutable;
-
 /**
  *
  */
-@Immutable
-public class HeaderSecurityConfig {
+public class XssProtectionConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-  
-  private XContentTypeConfig xContentType = new XContentTypeConfig();
-  
-  private XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
-  
-  private XssProtectionConfig xssProtection = new XssProtectionConfig();
+   
+  private boolean enabled = true;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
@@ -34,15 +27,7 @@ public class HeaderSecurityConfig {
   
   //---------------------------- Property Methods -----------------------------     
   
-  public XContentTypeConfig getXContentTypeConfig() {
-    return xContentType;
-  }
-  
-  public XFrameOptionsConfig getXFrameOptionsConfig() {
-    return xFrameOptions;
-  }
-  
-  public XssProtectionConfig getXssProtectionConfig() {
-    return xssProtection;
-  }
+  public boolean isEnabled() {
+    return enabled;
+  }  
 }
