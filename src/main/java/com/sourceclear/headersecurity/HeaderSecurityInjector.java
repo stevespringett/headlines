@@ -1,5 +1,6 @@
 package com.sourceclear.headersecurity;
 
+import com.google.common.collect.ImmutableList;
 import javax.annotation.concurrent.ThreadSafe;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,22 +13,31 @@ public class HeaderSecurityInjector {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
+  private static final ImmutableList<String> HEADER_LIST =ImmutableList.of(
+
+      "Content-Security-Policy", // W3 Standard
+      "X-Content-Security-Policy", // IE 10
+      "X-Webkit-CSP"); // Chrome < 25, Safari
+  
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   private final HeaderSecurityConfig config;
   
+  private final CspDirectives cspDirectives;
+  
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   public HeaderSecurityInjector (HeaderSecurityConfig config) {
     this.config = config;
+    cspDirectives = CspDirectives.build(config.getCspConfig());
   }
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   public void inject(HttpServletRequest request, HttpServletResponse response) {
-    System.out.println("Injecting secure headers");
+
     // XContentType
     if (config.getXContentTypeConfig().isEnabled()) {
       response.setHeader("X-Content-Type-Options", "nosniff");
@@ -43,16 +53,27 @@ public class HeaderSecurityInjector {
     
     // HSTS. This is only used for current HTTPS connections.
     HstsConfig hsts = config.getHstsConfig();
-    System.out.println("X-Forwarded-Proto: " + request.getHeader("X-Forwarded-Proto"));
+
     boolean secure = request.isSecure() | "https".equalsIgnoreCase(request.getHeader("X-Forwarded-Proto"));
-    if (secure) {
+    if (secure && hsts.isEnabled()) {
       String header = "max-age=" + hsts.getMaxAge();
       if (hsts.includeSubdomains()) {
         header += "; includeSubdomains";
       }
-      System.out.println("Setting Strict-Transport-Security to " + header);
       response.setHeader("Strict-Transport-Security", header);
     }
+    
+    CspConfig cspConfig = config.getCspConfig();
+    
+    if (cspConfig.isEnabled() && !cspDirectives.getCspDirectives().isEmpty()) {
+      for (String header : HEADER_LIST) {
+        response.setHeader(header, cspDirectives.getCspDirectives());
+      }
+    }
+    
+    if (cspConfig.isEnabled() && !cspDirectives.getReportCspDirectives().isEmpty()) {
+      response.setHeader("Content-Security-Policy-Report-Only", cspDirectives.getReportCspDirectives());        
+    }    
   }
   
   //------------------------ Implements:

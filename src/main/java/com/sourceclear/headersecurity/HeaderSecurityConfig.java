@@ -14,15 +14,15 @@ public class HeaderSecurityConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  private XContentTypeConfig xContentType = new XContentTypeConfig();
+  private volatile XContentTypeConfig xContentType = new XContentTypeConfig();
   
-  private XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
+  private volatile XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
   
-  private XssProtectionConfig xssProtection = new XssProtectionConfig();
+  private volatile XssProtectionConfig xssProtection = new XssProtectionConfig();
   
-  private HstsConfig hstsConfig = new HstsConfig();
+  private volatile HstsConfig hstsConfig = new HstsConfig();
   
-  private String proxyHeader = "X-Forwarded-Proto";
+  private volatile CspConfig cspConfig = new CspConfig(); 
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
@@ -52,5 +52,9 @@ public class HeaderSecurityConfig {
   
   public HstsConfig getHstsConfig() {
     return hstsConfig;
+  }
+  
+  public CspConfig getCspConfig() {
+    return cspConfig;
   }
 }

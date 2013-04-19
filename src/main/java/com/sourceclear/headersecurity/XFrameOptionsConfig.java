@@ -11,9 +11,9 @@ public class XFrameOptionsConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-  private boolean enabled = true;
+  private volatile boolean enabled = true;
   
-  private String value = "DENY";
+  private volatile String value = "DENY";
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   

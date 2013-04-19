@@ -11,7 +11,7 @@ public class XssProtectionConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
    
-  private boolean enabled = true;
+  private volatile boolean enabled = true;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   

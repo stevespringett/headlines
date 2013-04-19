@@ -14,11 +14,11 @@ public class HstsConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-  private boolean enabled = true;
+  private volatile boolean enabled = true;
   
-  private boolean includeSubdomains = true;
+  private volatile boolean includeSubdomains = true;
   
-  private long maxAge = 31536000L;
+  private volatile long maxAge = 31536000L;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   

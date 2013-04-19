@@ -14,7 +14,7 @@ public class XContentTypeConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  private boolean enabled = true;
+  private volatile boolean enabled = true;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
