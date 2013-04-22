@@ -116,4 +116,4 @@ The report-uri declaration dictates that when the browser determines a loading v
 the host server.  This is optional and can often show attack attempts or overly-restricted rules.  Analyzing the report-uri violations is beyond the scope of this project.
 
 ## Feedback
-Feedback on the source-csp project can be directed to opensource@sourceclear.com.
+Feedback on the Header Security project can be directed to opensource@sourceclear.com.
