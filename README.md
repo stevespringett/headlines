@@ -12,8 +12,9 @@ Here's what our SecureHeader implementation covers:
 
 ###1) [HTTP Strict Transport Security (HSTS)](https://tools.ietf.org/html/rfc6797)
 ###2) [X-Frame-Options](https://tools.ietf.org/html/draft-ietf-websec-x-frame-options-00)
-###3) [Microsoft's XSS Filter](http://msdn.microsoft.com/en-us/library/dd565647(v=vs.85).aspx)
-###4) [X-Content-Type Options](http://msdn.microsoft.com/en-us/library/ie/gg622941(v=vs.85).aspx)
+###3) [Microsoft's XSS Filter](http://msdn.microsoft.com/en-us/library/dd565647.aspx)
+###4) [X-Content-Type Options](http://msdn.microsoft.com/en-us/library/ie/gg622941.aspx)
+###5) [CSP](https://developer.mozilla.org/en-US/docs/Security/CSP)
 
 ##Installation
 Maven users cant simply use the following dependency:
@@ -46,16 +47,16 @@ Edit your web.xml file with the following entry:
 ```
 
 ### 2) Set up a config file (optional).
-Without a config file, HeaderSecurity will use a set of sensible default options.  If you want some of the features turned off or wish to fine tune
+Without a config file, HeaderSecurity will use a set of restricted default options.  If you want some of the features turned off or wish to fine tune
 others you'll want a config file.  Here is a complete config which uses the default settings:
 
 ```json
 
 {
   "xContentType": {
-    "enabled":true 
+    "enabled":true
   },
-
+  
   "xFrameOptions": {
     "enabled":true,
     "value":"DENY"
@@ -71,8 +72,12 @@ others you'll want a config file.  Here is a complete config which uses the defa
     "maxAge":31536000
   },
 
-  "proxyHeader":"X-Forwarded-Proto"
-}
+  "cspConfig": {
+    "csp": {
+      "default-src":["'self'"]},
+      "cspReportOnly":{}
+    }
+  }
 
 ```
 

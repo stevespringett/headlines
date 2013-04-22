@@ -15,21 +15,20 @@
     <license>
       <name>Mozilla Public License v2.0</name>
       <url>http://www.mozilla.org/MPL/</url>
-      <distribution>repo
-      </distribution>
+      <distribution>repo</distribution>
     </license>    
   </licenses>
 
   <scm>
-    <url>http://github.com/sourceclear/headersecurity</url>
+    <url>https://github.com/sourceclear/headersecurity</url>
     <connection></connection>
   </scm>
 
   <developers>
     <developer>
-      <id>kickroot</id>
-      <name>Jason Nichols</name>
-      <email>jason@sourceclear.com</email>
+      <id>sourceclear</id>
+      <name>SourceClear Inc</name>
+      <email>opensource@sourceclear.com</email>
     </developer>
   </developers>    
   
