@@ -53,7 +53,7 @@ public class HeaderSecurityInjector {
     
     // HSTS. This is only used for current HTTPS connections.
     HstsConfig hsts = config.getHstsConfig();
-
+    
     boolean secure = request.isSecure() | "https".equalsIgnoreCase(request.getHeader("X-Forwarded-Proto"));
     if (secure && hsts.isEnabled()) {
       String header = "max-age=" + hsts.getMaxAge();
@@ -62,7 +62,7 @@ public class HeaderSecurityInjector {
       }
       response.setHeader("Strict-Transport-Security", header);
     }
-    
+
     CspConfig cspConfig = config.getCspConfig();
     
     if (cspConfig.isEnabled() && !cspDirectives.getCspDirectives().isEmpty()) {
