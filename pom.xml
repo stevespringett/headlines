@@ -26,8 +26,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/sourceclear/headersecurity</url>
-    <connection />
+    <url>scm:git:git@github.com:sourceclear/headersecurity.git</url>
+    <connection>scm:git:git@github.com:sourceclear/headersecurity.git</connection>
+    <developerConnection>scm:git:git@github.com:sourceclear/headersecurity.git</developerConnection>
   </scm>
 
   <dependencies>  
