@@ -1,4 +1,4 @@
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -6,7 +6,7 @@ import javax.annotation.concurrent.Immutable;
  *
  */
 @Immutable
-public class XContentTypeConfig {
+public class HeaderSecurityConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
@@ -14,7 +14,15 @@ public class XContentTypeConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  private volatile boolean enabled = true;
+  private volatile XContentTypeConfig xContentType = new XContentTypeConfig();
+  
+  private volatile XFrameOptionsConfig xFrameOptions = new XFrameOptionsConfig();
+  
+  private volatile XssProtectionConfig xssProtection = new XssProtectionConfig();
+  
+  private volatile HstsConfig hstsConfig = new HstsConfig();
+  
+  private volatile CspConfig cspConfig = new CspConfig(); 
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
@@ -30,7 +38,23 @@ public class XContentTypeConfig {
   
   //---------------------------- Property Methods -----------------------------     
   
-  public boolean isEnabled() {
-    return enabled;
+  public XContentTypeConfig getXContentTypeConfig() {
+    return xContentType;
+  }
+  
+  public XFrameOptionsConfig getXFrameOptionsConfig() {
+    return xFrameOptions;
+  }
+  
+  public XssProtectionConfig getXssProtectionConfig() {
+    return xssProtection;
+  }
+  
+  public HstsConfig getHstsConfig() {
+    return hstsConfig;
+  }
+  
+  public CspConfig getCspConfig() {
+    return cspConfig;
   }
 }

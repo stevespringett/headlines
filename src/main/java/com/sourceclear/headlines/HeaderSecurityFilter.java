@@ -1,11 +1,11 @@
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sourceclear.headersecurity.serialization.ImmutableListDeserializer;
-import com.sourceclear.headersecurity.serialization.ImmutableMapDeserializer;
+import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
+import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,7 +32,7 @@ public class HeaderSecurityFilter implements Filter {
           .create();  
   
   
-  private static final String DEFAULT_CONFIG_NAME = "headerSecurity.conf";
+  private static final String DEFAULT_CONFIG_NAME = "headLines.conf";
   
   private static final String CONFIG_PARAM_NAME = "configFile";
   

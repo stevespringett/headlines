@@ -1,14 +1,14 @@
-## SourceClear - Header Security
+## SourceClear - HeadLines
 ### A collection of security related response headers designed to help increase security for servlet based apps.
 ===
 
 ##Overview
-Our HeaderSecurity project is a Java project inspired by Twitter's [SecureHeaders](https://github.com/twitter/secureheaders).  We have a Java implementation which
+Our HeadLines project is a Java project inspired by Twitter's [SecureHeaders](https://github.com/twitter/secureheaders).  We have a Java implementation which
 provides similar functionality to Twitter's Ruby implementation.  While never a guarantee of security, using these headers in your web based applications can help reduce the attack
 surface area exposed by your app.  
 
 ##Functionality
-Here's what our SecureHeader implementation covers:
+Here's what our HeadLines implementation covers:
 
 ###1) [HTTP Strict Transport Security (HSTS)](https://tools.ietf.org/html/rfc6797)
 ###2) [X-Frame-Options](https://tools.ietf.org/html/draft-ietf-websec-x-frame-options-00)
@@ -25,32 +25,32 @@ Maven users can simply use the following dependency:
 ```xml
 <dependency>
   <groupId>com.sourceclear</groupId>
-  <artifactId>headers-security</artifactId>
-  <version>0.1.0-SNAPSHOT</version>    
+  <artifactId>HeadLines</artifactId>
+  <version>0.1.1-SNAPSHOT</version>    
 </dependency>
 ```
-Note: SourceClear - HeaderSecurity is not yet in Maven Central, so users of the library will have to download and build the Maven project prior to including it.
+Note: SourceClear - HeadLines is not yet in Maven Central, so users of the library will have to download and build the Maven project prior to including it.
 
 ## Setting things up
-Once you have dependencies taken care of, setting up HeaderSecurity can be done in two steps:
+Once you have dependencies taken care of, setting up HeadLines can be done in two steps:
 
 ### 1) Set up the servlet filter
 Edit your web.xml file with the following entry:
 
 ```xml
 <filter>
-  <filter-name>headersecurity</filter-name>
-  <filter-class>com.sourceclear.headersecurity.HeaderSecurityFilter</filter-class>
+  <filter-name>headlines</filter-name>
+  <filter-class>com.sourceclear.headlines.HeaderSecurityFilter</filter-class>
 </filter>
 
 <filter-mapping>
-  <filter-name>headersecurity</filter-name>
+  <filter-name>headlines</filter-name>
   <url-pattern>*</url-pattern>
 </filter-mapping>
 ```
 
 ### 2) Set up a config file (optional).
-Without a config file, HeaderSecurity will use a set of restricted default options.  If you want some of the features turned off or wish to fine tune
+Without a config file, HeadLines will use a set of restricted default options.  If you want some of the features turned off or wish to fine tune
 others you'll want a config file.  Here is a complete config which uses the default settings:
 
 ```json
@@ -84,7 +84,7 @@ others you'll want a config file.  Here is a complete config which uses the defa
 
 ```
 
-This file should be saved into WEB-INF/headerSecurity.conf.
+This file should be saved into WEB-INF/headLines.conf.
 
 Most of the options should be self-explanatory.  The hstsConfig->maxAge option is the length in seconds the HSTS directive should be followed.  The spec
 recommends a length of 1 to 2 years.  The defualt is 1 year.  The 'proxyHeader' is currently used only by HSTS.  When behind a reverse proxy which handles SSL,
@@ -116,4 +116,4 @@ The report-uri declaration dictates that when the browser determines a loading v
 the host server.  This is optional and can often show attack attempts or overly-restricted rules.  Analyzing the report-uri violations is beyond the scope of this project.
 
 ## Feedback
-Feedback on the Header Security project can be directed to opensource@sourceclear.com.
+Feedback on the HeadLines project can be directed to opensource@sourceclear.com.

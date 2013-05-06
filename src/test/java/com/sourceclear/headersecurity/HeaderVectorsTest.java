@@ -1,13 +1,15 @@
 package com.sourceclear.headersecurity;
 
+import com.sourceclear.headlines.HeaderSecurityConfig;
+import com.sourceclear.headlines.HeaderSecurityInjector;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sourceclear.headersecurity.serialization.ImmutableListDeserializer;
-import com.sourceclear.headersecurity.serialization.ImmutableMapDeserializer;
+import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
+import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;

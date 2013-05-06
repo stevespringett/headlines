@@ -1,4 +1,4 @@
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
 
 import com.google.common.collect.ImmutableList;
 import javax.annotation.concurrent.ThreadSafe;

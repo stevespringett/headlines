@@ -1,25 +1,23 @@
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
 
-import javax.annotation.concurrent.Immutable;
+import com.google.gson.Gson;
 
 /**
  *
  */
-@Immutable
-public class HstsConfig {
+public class Test {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
+  public static void main(String[] args) {
+    HeaderSecurityConfig config = new HeaderSecurityConfig();
+    System.out.println(new Gson().toJson(config));
+  }
+  
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-  private volatile boolean enabled = true;
-  
-  private volatile boolean includeSubdomains = true;
-  
-  private volatile long maxAge = 31536000L;
-  
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -33,25 +31,4 @@ public class HstsConfig {
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
-
-  /**
-   * @return the enabled
-   */
-  public boolean isEnabled() {
-    return enabled;
-  }
-
-  /**
-   * @return the includeSubdomains
-   */
-  public boolean includeSubdomains() {
-    return includeSubdomains;
-  }
-
-  /**
-   * @return the maxAge
-   */
-  public long getMaxAge() {
-    return maxAge;
-  }
 }

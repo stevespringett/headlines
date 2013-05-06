@@ -1,4 +1,4 @@
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
 
 /**
  *

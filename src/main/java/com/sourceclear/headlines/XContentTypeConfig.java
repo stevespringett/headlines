@@ -1,16 +1,19 @@
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  *
  */
-public class XssProtectionConfig {
+@Immutable
+public class XContentTypeConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-   
+  
   private volatile boolean enabled = true;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
@@ -29,5 +32,5 @@ public class XssProtectionConfig {
   
   public boolean isEnabled() {
     return enabled;
-  }  
+  }
 }

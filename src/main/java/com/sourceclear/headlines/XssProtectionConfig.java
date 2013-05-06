@@ -1,23 +1,18 @@
-package com.sourceclear.headersecurity;
-
-import com.google.gson.Gson;
+package com.sourceclear.headlines;
 
 /**
  *
  */
-public class Test {
+public class XssProtectionConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  public static void main(String[] args) {
-    HeaderSecurityConfig config = new HeaderSecurityConfig();
-    System.out.println(new Gson().toJson(config));
-  }
-  
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
+   
+  private volatile boolean enabled = true;
+  
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -31,4 +26,8 @@ public class Test {
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
+  
+  public boolean isEnabled() {
+    return enabled;
+  }  
 }

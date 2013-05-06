@@ -6,24 +6,24 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
  */
 
-package com.sourceclear.headersecurity.serialization;
+package com.sourceclear.headlines.serialization;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.Map;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 /**
- * Customized JsonDeserializer which allows for deserializing Guava's ImmutableList
+ * Customized JsonDeserializer which allows for deserializing Guava's ImmutableMap
  * into objects via GSON.
  */
-public class ImmutableListDeserializer implements JsonDeserializer<ImmutableList<?>> {
-
+public class ImmutableMapDeserializer implements JsonDeserializer<ImmutableMap<?,?>>{
+  
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -36,13 +36,12 @@ public class ImmutableListDeserializer implements JsonDeserializer<ImmutableList
   
   //------------------------ Implements: JsonDeserializer
   
-  public ImmutableList<?> deserialize(JsonElement json, Type type,
-          JsonDeserializationContext context) throws JsonParseException {
-    final Type type2 = ParameterizedTypeImpl.make(List.class, ((ParameterizedType) type).getActualTypeArguments(), null);
-    final List<?> list = context.deserialize(json, type2);
+  public ImmutableMap<?, ?> deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+    final Type type2 = ParameterizedTypeImpl.make(Map.class, ((ParameterizedType) type).getActualTypeArguments(), null);
+    final Map<?,?> map = context.deserialize(json, type2);
 
-    return ImmutableList.copyOf(list);
-  }
+    return ImmutableMap.copyOf(map);
+  }  
   
   //------------------------ Overrides:
   
@@ -51,4 +50,5 @@ public class ImmutableListDeserializer implements JsonDeserializer<ImmutableList
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
+
 }

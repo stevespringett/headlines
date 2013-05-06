@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
  */
 
-package com.sourceclear.headersecurity;
+package com.sourceclear.headlines;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;

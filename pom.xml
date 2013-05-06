@@ -9,11 +9,11 @@
 
 
   <groupId>com.sourceclear</groupId>
-  <artifactId>header-security</artifactId>
+  <artifactId>headlines</artifactId>
   <version>0.1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>SourceClear - Headers</name>
+  <name>SourceClear - HeadLines</name>
   <url>http://www.sourceclear.com</url>
   <description>A servlet filter that adds a collection of security related headers to all responses.</description>
   
