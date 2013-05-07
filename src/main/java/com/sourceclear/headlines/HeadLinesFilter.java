@@ -1,15 +1,10 @@
 package com.sourceclear.headlines;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
-import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -22,27 +17,19 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  */
-public class HeaderSecurityFilter implements Filter {
+public class HeadLinesFilter implements Filter {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-  private static final Gson GSON = new GsonBuilder()
-          .registerTypeAdapter(ImmutableList.class, new ImmutableListDeserializer())
-          .registerTypeAdapter(ImmutableMap.class, new ImmutableMapDeserializer())
-          .create();  
-  
-  
+     
   private static final String DEFAULT_CONFIG_NAME = "headLines.conf";
   
   private static final String CONFIG_PARAM_NAME = "configFile";
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-  private HeaderSecurityConfig config;
+  //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\     
   
-  private HeaderSecurityInjector injector;
+  private volatile ImmutableList<HttpInjector> injectors = ImmutableList.of();
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
@@ -60,17 +47,26 @@ public class HeaderSecurityFilter implements Filter {
       }
       
       InputStream is = fc.getServletContext().getResourceAsStream("/WEB-INF/" + configFileName);
-      Reader reader = new InputStreamReader(is);
-      config = GSON.fromJson(reader, HeaderSecurityConfig.class);
-      injector = new HeaderSecurityInjector(config);
+      InjectorServiceLoader loader = new InjectorServiceLoader();
+      loader.load(is);
+      injectors = loader.getInjectorList();
+      
     } catch (Throwable t) {
       throw new ServletException("Couldn't initialize CspFilter", t);
     }
   }
 
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc) throws IOException, ServletException {
-    injector.inject(HttpServletRequest.class.cast(request), HttpServletResponse.class.cast(response));
-    fc.doFilter(request, response);
+
+    for (HttpInjector injector : injectors) {
+      try {
+        injector.inject(HttpServletRequest.class.cast(request), HttpServletResponse.class.cast(response));
+      } catch (Throwable t) {
+        Logger.getLogger(getClass().getName()).log(Level.WARNING, "Couldn't inject header", t);
+      }
+    }
+    
+    fc.doFilter(request, response);    
   }
 
   public void destroy() {}

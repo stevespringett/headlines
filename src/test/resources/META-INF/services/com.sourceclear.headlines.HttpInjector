@@ -1,0 +1,5 @@
+com.sourceclear.headlines.impl.CspInjector
+com.sourceclear.headlines.impl.HstsInjector
+com.sourceclear.headlines.impl.XContentTypeInjector
+com.sourceclear.headlines.impl.XFrameOptionsInjector
+com.sourceclear.headlines.impl.XssProtectionInjector

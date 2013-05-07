@@ -1,28 +1,27 @@
-package com.sourceclear.headlines;
+package com.sourceclear.headlines.impl;
 
-import com.google.gson.Gson;
+import com.sourceclear.headlines.HttpInjector;
+import javax.annotation.concurrent.Immutable;
 
 /**
  *
  */
-public class Test {
+@Immutable
+public final class XssProtectionConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  public static void main(String[] args) {
-    HeaderSecurityConfig config = new HeaderSecurityConfig();
-    System.out.println(new Gson().toJson(config));
-  }
-  
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
+   
+  private volatile boolean enabled = true;
+  
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements:
+  //------------------------ Implements: HttpInjectorConfig
   
   //------------------------ Overrides:
   
@@ -31,4 +30,10 @@ public class Test {
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
+  
+  public boolean isEnabled() {
+    return enabled;
+  }  
+
+
 }

@@ -40,7 +40,7 @@ Edit your web.xml file with the following entry:
 ```xml
 <filter>
   <filter-name>headlines</filter-name>
-  <filter-class>com.sourceclear.headlines.HeaderSecurityFilter</filter-class>
+  <filter-class>com.sourceclear.headlines.HeadLinesFilter</filter-class>
 </filter>
 
 <filter-mapping>

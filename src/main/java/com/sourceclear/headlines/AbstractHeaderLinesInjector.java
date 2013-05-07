@@ -1,26 +1,31 @@
 package com.sourceclear.headlines;
 
-import javax.annotation.concurrent.Immutable;
-
 /**
  *
  */
-@Immutable
-public class XContentTypeConfig {
+public abstract class AbstractHeaderLinesInjector<T> implements HttpInjector<T> {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-  
-  private volatile boolean enabled = true;
+    
+  private volatile T config;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements:
+  //------------------------ Implements: HttpInjector
+
+  public Class getConfigClass() {
+    return config.getClass();
+  }
+  
+  public void setConfig(T config) {
+    this.config = config;
+  }
   
   //------------------------ Overrides:
   
@@ -30,7 +35,7 @@ public class XContentTypeConfig {
   
   //---------------------------- Property Methods -----------------------------     
   
-  public boolean isEnabled() {
-    return enabled;
+  public T getConfig() {
+    return config;
   }
 }

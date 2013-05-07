@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
  */
 
-package com.sourceclear.headlines;
+package com.sourceclear.headlines.impl;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -18,7 +18,7 @@ import javax.annotation.concurrent.Immutable;
  * on filter initialization and are cached for future requests.
  */
 @Immutable
-public class CspDirectives {
+public final class CspDirectives {
 
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 

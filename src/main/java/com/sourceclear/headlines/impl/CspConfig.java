@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. 
  */
 
-package com.sourceclear.headlines;
+package com.sourceclear.headlines.impl;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -17,7 +17,7 @@ import javax.annotation.concurrent.Immutable;
  * from a config file which will be located in the WEB-INF folder.
  */
 @Immutable
-public class CspConfig {
+public final class CspConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
@@ -52,7 +52,7 @@ public class CspConfig {
 
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements:
+  //------------------------ Implements
   
   //------------------------ Overrides:
   
@@ -73,4 +73,6 @@ public class CspConfig {
   public ImmutableMap<String, ImmutableList<String>> getCspReportOnlyMap() {
     return cspReportOnly;
   }  
+
+
 }

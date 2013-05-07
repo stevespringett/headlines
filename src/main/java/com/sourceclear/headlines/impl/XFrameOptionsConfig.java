@@ -1,9 +1,12 @@
-package com.sourceclear.headlines;
+package com.sourceclear.headlines.impl;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  *
  */
-public class XFrameOptionsConfig {
+@Immutable
+public final class XFrameOptionsConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
@@ -19,7 +22,7 @@ public class XFrameOptionsConfig {
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements:
+  //------------------------ Implements
   
   //------------------------ Overrides:
   
@@ -36,4 +39,6 @@ public class XFrameOptionsConfig {
   public String getValue() {
     return value;
   }
+
+
 }

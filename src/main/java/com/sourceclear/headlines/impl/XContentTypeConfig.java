@@ -1,4 +1,4 @@
-package com.sourceclear.headlines;
+package com.sourceclear.headlines.impl;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -6,25 +6,21 @@ import javax.annotation.concurrent.Immutable;
  *
  */
 @Immutable
-public class HstsConfig {
+public final class XContentTypeConfig{
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
+  
   private volatile boolean enabled = true;
-  
-  private volatile boolean includeSubdomains = true;
-  
-  private volatile long maxAge = 31536000L;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements:
+  //------------------------ Implements: HttpInjectorConfig
   
   //------------------------ Overrides:
   
@@ -33,25 +29,10 @@ public class HstsConfig {
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
-
-  /**
-   * @return the enabled
-   */
+  
   public boolean isEnabled() {
     return enabled;
   }
 
-  /**
-   * @return the includeSubdomains
-   */
-  public boolean includeSubdomains() {
-    return includeSubdomains;
-  }
 
-  /**
-   * @return the maxAge
-   */
-  public long getMaxAge() {
-    return maxAge;
-  }
 }

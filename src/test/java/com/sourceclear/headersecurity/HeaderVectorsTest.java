@@ -1,20 +1,19 @@
 package com.sourceclear.headersecurity;
 
-import com.sourceclear.headlines.HeaderSecurityConfig;
-import com.sourceclear.headlines.HeaderSecurityInjector;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sourceclear.headlines.HttpInjector;
+import com.sourceclear.headlines.InjectorServiceLoader;
 import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
 import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -40,23 +39,18 @@ public class HeaderVectorsTest {
   
     private final String description;
     
-    private final HeaderSecurityConfig config;
+    private final ImmutableList<HttpInjector> injectors;
     
     private final Map<String,String> headers;
     
-    public TestVector(String description, HeaderSecurityConfig config, Map<String,String> headers) {
+    public TestVector(String description, ImmutableList<HttpInjector> injectors, Map<String,String> headers) {
       this.description = description;
-      this.config = config;
+      this.injectors = injectors;
       this.headers = headers;
     }
   }
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-  
-  private static final Gson GSON = new GsonBuilder()
-          .registerTypeAdapter(ImmutableList.class, new ImmutableListDeserializer())
-          .registerTypeAdapter(ImmutableMap.class, new ImmutableMapDeserializer())
-          .create();  
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
@@ -74,7 +68,11 @@ public class HeaderVectorsTest {
     
     
     for (File file : vectors) {
-      HeaderSecurityConfig config = GSON.fromJson(new FileReader(file), HeaderSecurityConfig.class);
+      FileInputStream is = new FileInputStream(file);
+      InjectorServiceLoader loader = new InjectorServiceLoader();
+      loader.load(is);
+      ImmutableList<HttpInjector> injectors = loader.getInjectorList();
+      
       File propertiesFile = new File(file.getParent(), file.getName() + ".properties");
       Properties p = new Properties();
       p.load(new FileInputStream(propertiesFile));
@@ -83,7 +81,7 @@ public class HeaderVectorsTest {
         map.put(key, p.getProperty(key));
       }
       
-      list.add(Lists.newArrayList(new TestVector(file.getName(), config, map)).toArray(new TestVector[0]));      
+      list.add(Lists.newArrayList(new TestVector(file.getName(), injectors, map)).toArray(new TestVector[0]));      
     }   
     
     return list;
@@ -107,7 +105,6 @@ public class HeaderVectorsTest {
     // Verify for the given config that the injected headers match what's provided
     // in the test vector.
     //
-    HeaderSecurityInjector injector = new HeaderSecurityInjector(vector.config);
     MockHttpServletResponse response = new MockHttpServletResponse();
     
     
@@ -115,11 +112,11 @@ public class HeaderVectorsTest {
     MockHttpServletRequest request = new MockHttpServletRequest();
     request.setSecure(true);
     
-    injector.inject(request, response);
+    for (HttpInjector injector : vector.injectors) {
+      injector.inject(request, response);
+    }
     
-//    for (String headerName : response.getHeaderNames()) {
-//      System.out.println(headerName + " = " + response.getHeader(headerName));
-//    }
+    
     // Verify count
     
     System.out.println("\tTesting " + vector.description);
