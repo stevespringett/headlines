@@ -29,7 +29,7 @@ public class HeadLinesFilter implements Filter {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\     
   
-  private volatile ImmutableList<HttpInjector> injectors = ImmutableList.of();
+  private volatile ImmutableList<HeadLinesInjector> injectors = ImmutableList.of();
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
@@ -58,7 +58,7 @@ public class HeadLinesFilter implements Filter {
 
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc) throws IOException, ServletException {
 
-    for (HttpInjector injector : injectors) {
+    for (HeadLinesInjector injector : injectors) {
       try {
         injector.inject(HttpServletRequest.class.cast(request), HttpServletResponse.class.cast(response));
       } catch (Throwable t) {

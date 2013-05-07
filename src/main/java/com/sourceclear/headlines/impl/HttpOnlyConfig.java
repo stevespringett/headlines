@@ -1,27 +1,31 @@
 package com.sourceclear.headlines.impl;
 
-import com.sourceclear.headlines.HeadLinesInjector;
-import javax.annotation.concurrent.Immutable;
+import com.google.common.collect.ImmutableList;
 
 /**
  *
  */
-@Immutable
-public final class XssProtectionConfig {
+public class HttpOnlyConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   ////////////////////////////// Class Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-   
-  private volatile boolean enabled = true;
+    
+  private volatile boolean enabled = true;  
+  
+  private volatile ImmutableList<String> sessionPatterns;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
+  public HttpOnlyConfig() {
+    sessionPatterns = ImmutableList.of("JSESSIONID", "jSessionId", "jSessionID");
+  }
+  
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements: HttpInjectorConfig
+  //------------------------ Implements:
   
   //------------------------ Overrides:
   
@@ -33,7 +37,9 @@ public final class XssProtectionConfig {
   
   public boolean isEnabled() {
     return enabled;
-  }  
-
-
+  }
+  
+  public ImmutableList<String> getSessionPatterns() {
+    return sessionPatterns; 
+  }
 }

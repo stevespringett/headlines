@@ -34,23 +34,23 @@ public final class InjectorServiceLoader {
   
   private Map<String, Object> config = Maps.newHashMap();
   
-  private volatile ImmutableList<HttpInjector> injectors;
+  private volatile ImmutableList<HeadLinesInjector> injectors;
   
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   public void load(InputStream is) throws IOException {
-    ServiceLoader<HttpInjector> serviceLoader = ServiceLoader.load(HttpInjector.class);  
+    ServiceLoader<HeadLinesInjector> serviceLoader = ServiceLoader.load(HeadLinesInjector.class);  
     
     config.clear();
-    ImmutableList.Builder<HttpInjector> builder = new ImmutableList.Builder<HttpInjector>();
+    ImmutableList.Builder<HeadLinesInjector> builder = new ImmutableList.Builder<HeadLinesInjector>();
    
     Reader reader = new InputStreamReader(is);
     config = GSON.fromJson(reader, Map.class);
 
     // Time to load our services and initialize them with a config
-    for (HttpInjector injector : serviceLoader) {
+    for (HeadLinesInjector injector : serviceLoader) {
       Object injectorConfig = config.get(injector.getConfigClass().getSimpleName());
       if (injectorConfig != null) {
         injector.setConfig(GSON.fromJson(GSON.toJson(injectorConfig), injector.getConfigClass()));
@@ -71,7 +71,7 @@ public final class InjectorServiceLoader {
   
   //---------------------------- Property Methods -----------------------------    
 
-  public ImmutableList<HttpInjector> getInjectorList() {
+  public ImmutableList<HeadLinesInjector> getInjectorList() {
     return injectors;
   }
 

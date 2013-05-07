@@ -3,7 +3,7 @@ package com.sourceclear.headlines;
 /**
  *
  */
-public abstract class AbstractHeaderLinesInjector<T> implements HttpInjector<T> {
+public abstract class AbstractHeaderLinesInjector<T> implements HeadLinesInjector<T> {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
@@ -17,7 +17,7 @@ public abstract class AbstractHeaderLinesInjector<T> implements HttpInjector<T> 
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  //------------------------ Implements: HttpInjector
+  //------------------------ Implements: HeadLinesInjector
 
   public Class getConfigClass() {
     return config.getClass();

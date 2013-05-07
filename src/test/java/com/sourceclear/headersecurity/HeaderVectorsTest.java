@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sourceclear.headlines.HttpInjector;
+import com.sourceclear.headlines.HeadLinesInjector;
 import com.sourceclear.headlines.InjectorServiceLoader;
 import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
 import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
@@ -39,11 +39,11 @@ public class HeaderVectorsTest {
   
     private final String description;
     
-    private final ImmutableList<HttpInjector> injectors;
+    private final ImmutableList<HeadLinesInjector> injectors;
     
     private final Map<String,String> headers;
     
-    public TestVector(String description, ImmutableList<HttpInjector> injectors, Map<String,String> headers) {
+    public TestVector(String description, ImmutableList<HeadLinesInjector> injectors, Map<String,String> headers) {
       this.description = description;
       this.injectors = injectors;
       this.headers = headers;
@@ -71,7 +71,7 @@ public class HeaderVectorsTest {
       FileInputStream is = new FileInputStream(file);
       InjectorServiceLoader loader = new InjectorServiceLoader();
       loader.load(is);
-      ImmutableList<HttpInjector> injectors = loader.getInjectorList();
+      ImmutableList<HeadLinesInjector> injectors = loader.getInjectorList();
       
       File propertiesFile = new File(file.getParent(), file.getName() + ".properties");
       Properties p = new Properties();
@@ -112,7 +112,7 @@ public class HeaderVectorsTest {
     MockHttpServletRequest request = new MockHttpServletRequest();
     request.setSecure(true);
     
-    for (HttpInjector injector : vector.injectors) {
+    for (HeadLinesInjector injector : vector.injectors) {
       injector.inject(request, response);
     }
     

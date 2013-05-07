@@ -1,11 +1,13 @@
-package com.sourceclear.headlines;
+package com.sourceclear.headlines.impl;
 
-import com.google.common.collect.ImmutableList;
+import com.sourceclear.headlines.AbstractHeaderLinesInjector;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  */
-public class HttpOnlyConfig {
+public class HttpOnlyInjector extends AbstractHeaderLinesInjector<HttpOnlyConfig> {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
@@ -13,33 +15,23 @@ public class HttpOnlyConfig {
   
   //////////////////////////////// Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-  private volatile boolean enabled = true;  
-  
-  private volatile ImmutableList<String> sessionPatterns;
-  
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
-  
-  public HttpOnlyConfig() {
-    sessionPatterns = ImmutableList.of("JSESSIONID", "jSessionId", "jSessionID");
-  }
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   //------------------------ Implements:
   
-  //------------------------ Overrides:
+  //------------------------ Overrides: AbstractHeaderLinesInjector
+
+  public void inject(HttpServletRequest request, HttpServletResponse response) {
+
+    HttpOnlyConfig config = getConfig();
+
+  }
   
   //---------------------------- Abstract Methods -----------------------------
   
   //---------------------------- Utility Methods ------------------------------
   
   //---------------------------- Property Methods -----------------------------     
-  
-  public boolean isEnabled() {
-    return enabled;
-  }
-  
-  public ImmutableList<String> getSessionPatterns() {
-    return sessionPatterns; 
-  }
 }

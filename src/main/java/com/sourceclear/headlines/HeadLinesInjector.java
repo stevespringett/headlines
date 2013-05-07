@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  */
-public interface HttpInjector<T> {
+public interface HeadLinesInjector<T> {
 
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
