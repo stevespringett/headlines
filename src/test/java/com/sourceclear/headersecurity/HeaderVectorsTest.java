@@ -1,15 +1,10 @@
 package com.sourceclear.headersecurity;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sourceclear.headlines.HeadLinesInjector;
 import com.sourceclear.headlines.InjectorServiceLoader;
-import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
-import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -99,8 +94,10 @@ public class HeaderVectorsTest {
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
+  
   @Test
   public void testHeaderOutput() throws Exception {
+    
     //
     // Verify for the given config that the injected headers match what's provided
     // in the test vector.
@@ -127,7 +124,7 @@ public class HeaderVectorsTest {
       String responseValue = response.getHeader(key);
       String vectorValue = vector.headers.get(key);
       assertEquals(vector.description +  " - Injected header mismatch: " + key, vectorValue, responseValue);
-    }
+    }   
     
   }
   

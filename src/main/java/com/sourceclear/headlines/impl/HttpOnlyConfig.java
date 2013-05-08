@@ -1,10 +1,16 @@
 package com.sourceclear.headlines.impl;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+import java.util.Set;
+import java.util.regex.Pattern;
+import javax.annotation.concurrent.Immutable;
 
 /**
  *
  */
+@Immutable
 public class HttpOnlyConfig {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -20,10 +26,20 @@ public class HttpOnlyConfig {
   /////////////////////////////// Constructors \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  
   
   public HttpOnlyConfig() {
-    sessionPatterns = ImmutableList.of("JSESSIONID", "jSessionId", "jSessionID");
+    sessionPatterns = ImmutableList.of("JSESSIONID");
   }
   
   ////////////////////////////////// Methods \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  
+  public ImmutableSet<Pattern> buildPatterns() {
+    Set<Pattern> patterns = Sets.newHashSet();
+            
+    for (String pattern : sessionPatterns) {
+      patterns.add(Pattern.compile(pattern, Pattern.CASE_INSENSITIVE));
+    }
+            
+    return ImmutableSet.copyOf(patterns);
+  }
   
   //------------------------ Implements:
   
@@ -41,5 +57,5 @@ public class HttpOnlyConfig {
   
   public ImmutableList<String> getSessionPatterns() {
     return sessionPatterns; 
-  }
+  } 
 }
