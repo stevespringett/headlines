@@ -15,9 +15,9 @@ Here's what our HeadLines implementation covers:
 ###3) [Microsoft's XSS Filter](http://msdn.microsoft.com/en-us/library/dd565647.aspx)
 ###4) [X-Content-Type Options](http://msdn.microsoft.com/en-us/library/ie/gg622941.aspx)
 ###5) [CSP](https://developer.mozilla.org/en-US/docs/Security/CSP)
+###6) [HttpOnly Cookies](https://www.owasp.org/index.php/HttpOnly)
 
-Most of the functionality is simple to configure.  CSP is the exception, and it may take a period of trial and error to pin down the most secure config that doesnt' restrict
-allowable usage.
+Most of the functionality is simple to configure.  CSP is the exception, and it may take a period of trial and error to pin down the most secure config that doesn't restrict allowable usage.
 
 ##Installation
 Maven users can simply use the following dependency:
@@ -25,7 +25,7 @@ Maven users can simply use the following dependency:
 ```xml
 <dependency>
   <groupId>com.sourceclear</groupId>
-  <artifactId>HeadLines</artifactId>
+  <artifactId>headlines</artifactId>
   <version>0.1.1-SNAPSHOT</version>    
 </dependency>
 ```
@@ -56,35 +56,40 @@ others you'll want a config file.  Here is a complete config which uses the defa
 ```json
 
 {
-  "xContentType": {
-    "enabled":true
+  "XContentTypeConfig": {
+    "enabled": true
   },
   
-  "xFrameOptions": {
-    "enabled":true,
+  "XFrameOptionsConfig": {
+    "enabled": true,
     "value":"DENY"
   },
 
-  "xssProtection": {
-    "enabled":true
+  "XssProtectionConfig": {
+    "enabled": true
   },
 
-  "hstsConfig": {
-    "enabled":true,
+  "HstsConfig": {
+    "enabled": true,
     "includeSubdomains":true,
     "maxAge":31536000
   },
 
-  "cspConfig": {
+  "CspConfig": {
     "csp": {
-      "default-src":["'self'"]},      
+      "default-src":["'self'"]
     },
     "cspReportOnly":{}
-  }
+  },
 
+  "HttpOnlyConfig": {
+    "enabled": true,
+    "sessionPatterns": ["JSESSIONID"]
+  }
+}
 ```
 
-This file should be saved into WEB-INF/headLines.conf.
+This file should be saved into WEB-INF/headlines.conf.
 
 Most of the options should be self-explanatory.  The hstsConfig->maxAge option is the length in seconds the HSTS directive should be followed.  The spec
 recommends a length of 1 to 2 years.  The defualt is 1 year.  The 'proxyHeader' is currently used only by HSTS.  When behind a reverse proxy which handles SSL,
@@ -92,10 +97,11 @@ the proxy server will often add this header on the request to inform the app ser
 defacto-standard (AWS's elastic load balancer does this by default, for example), you can change this is if needed.
 
 ####For CSP
-CSP has the bulk of the configuration options.  The following example shows permitted fields under the "csp" object configuration:
+CSP has the bulk of the configuration options.  The following example shows permitted CSP fields:
 
-```xml
-  "csp": {
+```json	
+
+  "CspConfig": {
       "default-src":["'none'"],
       "script-src":["'self'"],
       "style-src":["'self'", "fonts.googleapis.com"],
@@ -105,7 +111,7 @@ CSP has the bulk of the configuration options.  The following example shows perm
       "font-src":["themes.googleusercontent.com"],
       "connect-src":["'none'"],
       "report-uri": ["/report/violation"]
-  },
+  }
 ```
 
 Each of the source types are defined in the [CSP RFC](http://www.w3.org/TR/2012/CR-CSP-20121115/).  In the above example, media, frames, and connect sources are outlawed
@@ -114,6 +120,21 @@ from the source host as well).
 
 The report-uri declaration dictates that when the browser determines a loading violation was attempted, it should report this to the url located at /report/violation on
 the host server.  This is optional and can often show attack attempts or overly-restricted rules.  Analyzing the report-uri violations is beyond the scope of this project.
+
+####HttpOnly
+As discussed in the [OWASP wiki](https://www.owasp.org/index.php/HttpOnly), HttpOnly is a flag in the Set-Cookie response header.  When set, browsers which implement the HttpOnly flag will not allow scripts running within the browser to access the cookie.  When set on session cookies it helps reduce the available vectors for XSS attacks.
+
+HeadLines HttpOnlyConfig accepts a list of regex patterns under the "sessionPatterns" key.  The default is simply "JSESSIONID", but it can be easily modified to use any named pattern to match your sensitive cookies:
+
+```json
+  "HttpOnlyConfig": {
+    "enabled": true,
+    "sessionPatterns": ["JSESSIONID", "myAuthCookie", "auth*"]
+  }
+  
+```
+
+The above settings will match 'JESSIONID', 'myAuthCookie', or any cookie that matches the pattern 'auth*'.  All patterns are considered case insensitive for matching purposes.  When a matching cookie is found, the Set-Cookie header is modified by appending an 'HttpOnly' flag to it.
 
 ## Feedback
 Feedback on the HeadLines project can be directed to opensource@sourceclear.com.

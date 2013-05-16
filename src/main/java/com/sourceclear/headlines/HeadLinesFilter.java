@@ -21,7 +21,7 @@ public class HeadLinesFilter implements Filter {
   
   ///////////////////////////// Class Attributes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      
-  private static final String DEFAULT_CONFIG_NAME = "headLines.conf";
+  private static final String DEFAULT_CONFIG_NAME = "headlines.conf";
   
   private static final String CONFIG_PARAM_NAME = "configFile";
   
@@ -40,7 +40,7 @@ public class HeadLinesFilter implements Filter {
   public void init(FilterConfig fc) throws ServletException {
     try {
       String configFileName = DEFAULT_CONFIG_NAME;
-      
+     
       String configParam = fc.getInitParameter(CONFIG_PARAM_NAME);
       if (configParam != null) {
         configFileName = configParam;
