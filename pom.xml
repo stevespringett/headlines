@@ -1,54 +1,63 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.sourceclear.pom</groupId>
-    <artifactId>sourceclear-private</artifactId>
-    <version>0.1.0</version>
-  </parent>
+	<groupId>com.sourceclear</groupId>
+	<artifactId>headlines</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
+	<name>SourceClear - HeadLines</name>
+	<url>http://www.sourceclear.com</url>
+	<description>A servlet filter that adds a collection of security related headers to all responses.</description>
 
-  <groupId>com.sourceclear</groupId>
-  <artifactId>headlines</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-  <name>SourceClear - HeadLines</name>
-  <url>http://www.sourceclear.com</url>
-  <description>A servlet filter that adds a collection of security related headers to all responses.</description>
-  
-  <licenses>
-    <license>
-      <name>Mozilla Public License v2.0</name>
-      <url>http://www.mozilla.org/MPL/</url>
-      <distribution>repo</distribution>
-    </license>    
-  </licenses>
+	<scm>
+		<url>scm:git:git@github.com:sourceclear/headlines.git</url>
+		<connection>scm:git:git@github.com:sourceclear/headlines.git</connection>
+		<developerConnection>scm:git:git@github.com:sourceclear/headlines.git</developerConnection>
+	</scm>
 
-  <scm>
-    <url>scm:git:git@github.com:sourceclear/headersecurity.git</url>
-    <connection>scm:git:git@github.com:sourceclear/headersecurity.git</connection>
-    <developerConnection>scm:git:git@github.com:sourceclear/headersecurity.git</developerConnection>
-  </scm>
-
-  <dependencies>  
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
-    </dependency>    
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>3.2.2.RELEASE</version>
-      <scope>test</scope>
-    </dependency>    
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>13.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.2.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
