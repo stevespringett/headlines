@@ -3,7 +3,7 @@
 
 	<groupId>com.sourceclear</groupId>
 	<artifactId>headlines</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 	<packaging>jar</packaging>
 
   <properties>
