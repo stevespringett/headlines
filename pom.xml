@@ -6,6 +6,10 @@
 	<version>0.1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
 	<name>SourceClear - HeadLines</name>
 	<url>http://www.sourceclear.com</url>
 	<description>A servlet filter that adds a collection of security related headers to all responses.</description>
@@ -59,4 +63,61 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+  
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>sourceclearReleases</id>
+      <name>SourceClear Releases</name>
+      <url>https://maven.sourceclear.com/content/repositories/releases/</url>
+      <layout>default</layout>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>sourceclearSnapshots</id>
+      <name>SourceClear Snapshots</name>
+      <url>https://maven.sourceclear.com/content/repositories/snapshots/</url>
+      <layout>default</layout>
+    </snapshotRepository>
+  </distributionManagement>  
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+      </plugin>       
+    </plugins>    
+  </build>
+  
+  <profiles>
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>                
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+    
 </project>
