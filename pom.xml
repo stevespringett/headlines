@@ -6,6 +6,12 @@
 	<version>0.1.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -64,7 +70,7 @@
 		</dependency>
 	</dependencies>
   
-  <distributionManagement>
+<!--  <distributionManagement>
     <repository>
       <uniqueVersion>false</uniqueVersion>
       <id>sourceclearReleases</id>
@@ -79,8 +85,7 @@
       <url>https://maven.sourceclear.com/content/repositories/snapshots/</url>
       <layout>default</layout>
     </snapshotRepository>
-  </distributionManagement>  
-  
+  </distributionManagement>  -->  
   <build>
     <plugins>
       <plugin>
