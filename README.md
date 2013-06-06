@@ -29,7 +29,6 @@ Maven users can simply use the following dependency:
   <version>0.1.1-SNAPSHOT</version>    
 </dependency>
 ```
-Note: SourceClear - HeadLines is not yet in Maven Central, so users of the library will have to download and build the Maven project prior to including it.
 
 ## Setting things up
 Once you have dependencies taken care of, setting up HeadLines can be done in two steps:
