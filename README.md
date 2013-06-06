@@ -26,7 +26,7 @@ Maven users can simply use the following dependency:
 <dependency>
   <groupId>com.sourceclear</groupId>
   <artifactId>headlines</artifactId>
-  <version>0.1.1-SNAPSHOT</version>    
+  <version>0.1.3</version>    
 </dependency>
 ```
 
