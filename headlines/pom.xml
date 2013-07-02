@@ -2,28 +2,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.sourceclear.headlines</groupId>
-	<artifactId>headlines-parent</artifactId>
+	<artifactId>headlines</artifactId>
 	<version>0.1.4-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
   
   <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
+    <groupId>com.sourceclear.headlines</groupId>
+    <artifactId>headlines-parent</artifactId>
+    <version>0.1.4-SNAPSHOT</version>
   </parent>
 
-  <modules>
-    <module>headlines</module>
-    <module>http-only</module>
-    <module>secure</module>    
-    <module>complete</module>    
-  </modules>
-  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
-	<name>SourceClear - HeadLines Parent</name>
+	<name>SourceClear - HeadLines</name>
 	<url>http://www.sourceclear.com</url>
 	<description>A servlet filter that adds a collection of security related headers to all responses.</description>
 

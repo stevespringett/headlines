@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sourceclear.headlines</groupId>
+	<artifactId>complete</artifactId>
+	<version>0.1.4-SNAPSHOT</version>
+	<packaging>jar</packaging>
+  
+  <name>SourceClear - Complete</name>
+  
+  <parent>
+    <groupId>com.sourceclear.headlines</groupId>
+    <artifactId>headlines-parent</artifactId>
+    <version>0.1.4-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.sourceclear.headlines</groupId>
+      <artifactId>headlines</artifactId>
+      <version>0.1.4-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sourceclear.headlines</groupId>
+      <artifactId>http-only</artifactId>
+      <version>0.1.4-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sourceclear.headlines</groupId>
+      <artifactId>secure</artifactId>
+      <version>0.1.4-SNAPSHOT</version>
+    </dependency>        
+  </dependencies>
+</project>
