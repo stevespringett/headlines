@@ -3,7 +3,7 @@
 
 	<groupId>com.sourceclear.headlines</groupId>
 	<artifactId>complete</artifactId>
-	<version>0.1.4</version>
+	<version>0.1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
   
   <name>SourceClear - Complete</name>
@@ -11,7 +11,7 @@
   <parent>
     <groupId>com.sourceclear.headlines</groupId>
     <artifactId>headlines-parent</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -22,17 +22,17 @@
     <dependency>
       <groupId>com.sourceclear.headlines</groupId>
       <artifactId>headlines</artifactId>
-      <version>0.1.4</version>
+      <version>0.1.5-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.sourceclear.headlines</groupId>
       <artifactId>http-only</artifactId>
-      <version>0.1.4</version>
+      <version>0.1.5-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.sourceclear.headlines</groupId>
       <artifactId>secure</artifactId>
-      <version>0.1.4</version>
+      <version>0.1.5-SNAPSHOT</version>
     </dependency>        
   </dependencies>
 </project>

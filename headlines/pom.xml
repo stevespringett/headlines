@@ -3,13 +3,13 @@
 
 	<groupId>com.sourceclear.headlines</groupId>
 	<artifactId>headlines</artifactId>
-	<version>0.1.4</version>
+	<version>0.1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
   
   <parent>
     <groupId>com.sourceclear.headlines</groupId>
     <artifactId>headlines-parent</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
   </parent>
 
   <properties>

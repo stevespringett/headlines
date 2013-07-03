@@ -3,7 +3,7 @@
 
 	<groupId>com.sourceclear.headlines</groupId>
 	<artifactId>secure</artifactId>
-	<version>0.1.4</version>
+	<version>0.1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
   
   <name>SourceClear - Secure</name>
@@ -11,7 +11,7 @@
   <parent>
     <groupId>com.sourceclear.headlines</groupId>
     <artifactId>headlines-parent</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
   </parent>
 
   <properties>
