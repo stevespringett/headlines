@@ -75,7 +75,6 @@ public final class InjectorServiceLoader {
     // Time to load our services and initialize them with a config
     for (HeadLinesInjector injector : serviceLoader) {      
       Object injectorConfig = config.get(injector.getConfigClass().getSimpleName());
-      Logger.getLogger(getClass().getName()).info("Config: " + injectorConfig);
       if (injectorConfig != null) {
         Logger.getLogger(getClass().getName()).info("Injecting config into " + injector.getConfigClass());
         injector.setConfig(GSON.fromJson(GSON.toJson(injectorConfig), injector.getConfigClass()));

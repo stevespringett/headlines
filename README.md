@@ -3,9 +3,7 @@
 ===
 
 ##Overview
-Our HeadLines project is a Java project inspired by Twitter's [SecureHeaders](https://github.com/twitter/secureheaders).  We have a Java implementation which
-provides similar functionality to Twitter's Ruby implementation.  While never a guarantee of security, using these headers in your web based applications can help reduce the attack
-surface area exposed by your app.  
+Our HeadLines project is a Java project inspired by Twitter's [SecureHeaders](https://github.com/twitter/secureheaders).  We have a Java implementation which provides similar functionality to Twitter's Ruby implementation.  While never a guarantee of security, using these headers in your web based applications can help reduce the attack surface area exposed by your app.  
 
 ##Functionality
 Here's what our HeadLines implementation covers:
@@ -15,40 +13,15 @@ Here's what our HeadLines implementation covers:
 ###3) [Microsoft's XSS Filter](http://msdn.microsoft.com/en-us/library/dd565647.aspx)
 ###4) [X-Content-Type Options](http://msdn.microsoft.com/en-us/library/ie/gg622941.aspx)
 ###5) [CSP](https://developer.mozilla.org/en-US/docs/Security/CSP)
-###6) [HttpOnly Cookies](https://www.owasp.org/index.php/HttpOnly)
+###6) [HttpOnly Cookies*](https://www.owasp.org/index.php/HttpOnly)
+###7) [Secure Cookies*](https://www.owasp.org/index.php/SecureFlag)
+
+* Servlet 3.0 required.
 
 Most of the functionality is simple to configure.  CSP is the exception, and it may take a period of trial and error to pin down the most secure config that doesn't restrict allowable usage.
 
-##Installation
-Maven users can simply use the following dependency:
 
-```xml
-<dependency>
-  <groupId>com.sourceclear</groupId>
-  <artifactId>headlines</artifactId>
-  <version>0.1.3</version>    
-</dependency>
-```
-
-## Setting things up
-Once you have dependencies taken care of, setting up HeadLines can be done in two steps:
-
-### 1) Set up the servlet filter
-Edit your web.xml file with the following entry:
-
-```xml
-<filter>
-  <filter-name>headlines</filter-name>
-  <filter-class>com.sourceclear.headlines.HeadLinesFilter</filter-class>
-</filter>
-
-<filter-mapping>
-  <filter-name>headlines</filter-name>
-  <url-pattern>*</url-pattern>
-</filter-mapping>
-```
-
-### 2) Set up a config file (optional).
+### Set up a config file (optional).
 Without a config file, HeadLines will use a set of restricted default options.  If you want some of the features turned off or wish to fine tune
 others you'll want a config file.  Here is a complete config which uses the default settings:
 
@@ -81,10 +54,6 @@ others you'll want a config file.  Here is a complete config which uses the defa
     "cspReportOnly":{}
   },
 
-  "HttpOnlyConfig": {
-    "enabled": true,
-    "sessionPatterns": ["JSESSIONID"]
-  }
 }
 ```
 
@@ -119,21 +88,6 @@ from the source host as well).
 
 The report-uri declaration dictates that when the browser determines a loading violation was attempted, it should report this to the url located at /report/violation on
 the host server.  This is optional and can often show attack attempts or overly-restricted rules.  Analyzing the report-uri violations is beyond the scope of this project.
-
-####HttpOnly
-As discussed in the [OWASP wiki](https://www.owasp.org/index.php/HttpOnly), HttpOnly is a flag in the Set-Cookie response header.  When set, browsers which implement the HttpOnly flag will not allow scripts running within the browser to access the cookie.  When set on session cookies it helps reduce the available vectors for XSS attacks.
-
-HeadLines HttpOnlyConfig accepts a list of regex patterns under the "sessionPatterns" key.  The default is simply "JSESSIONID", but it can be easily modified to use any named pattern to match your sensitive cookies:
-
-```json
-  "HttpOnlyConfig": {
-    "enabled": true,
-    "sessionPatterns": ["JSESSIONID", "myAuthCookie", "auth*"]
-  }
-  
-```
-
-The above settings will match 'JESSIONID', 'myAuthCookie', or any cookie that matches the pattern 'auth*'.  All patterns are considered case insensitive for matching purposes.  When a matching cookie is found, the Set-Cookie header is modified by appending an 'HttpOnly' flag to it.
 
 ## Feedback
 Feedback on the HeadLines project can be directed to opensource@sourceclear.com.
