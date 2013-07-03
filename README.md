@@ -20,6 +20,8 @@ Here's what our HeadLines implementation covers:
 
 Most of the functionality is simple to configure.  CSP is the exception, and it may take a period of trial and error to pin down the most secure config that doesn't restrict allowable usage.
 
+### Installation
+See the [Wiki](https://github.com/sourceclear/headlines/wiki) for installation details
 
 ### Set up a config file (optional).
 Without a config file, HeadLines will use a set of restricted default options.  If you want some of the features turned off or wish to fine tune
