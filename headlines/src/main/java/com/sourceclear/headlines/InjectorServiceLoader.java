@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -69,7 +70,7 @@ public final class InjectorServiceLoader {
       Logger.getLogger(getClass().getName()).info(GSON.toJson(config));
       Logger.getLogger(getClass().getName()).info("Loading custom config file.");
     } catch (Throwable t) {
-      Logger.getLogger(getClass().getName()).info("No config file found, using restricted defaults");
+      Logger.getLogger(getClass().getName()).log(Level.INFO, "No config file found, using restricted defaults", t);
     }
     
     // Time to load our services and initialize them with a config
