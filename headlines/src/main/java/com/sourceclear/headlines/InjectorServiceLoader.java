@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.sourceclear.headlines.serialization.ImmutableListDeserializer;
 import com.sourceclear.headlines.serialization.ImmutableMapDeserializer;
 import java.io.IOException;
@@ -69,8 +71,10 @@ public final class InjectorServiceLoader {
       config = GSON.fromJson(reader, Map.class);
       Logger.getLogger(getClass().getName()).info(GSON.toJson(config));
       Logger.getLogger(getClass().getName()).info("Loading custom config file.");
-    } catch (Throwable t) {
-      Logger.getLogger(getClass().getName()).log(Level.INFO, "No config file found, using restricted defaults", t);
+    } catch (JsonIOException ex) {
+      Logger.getLogger(getClass().getName()).log(Level.INFO, "No config file found, using restricted defaults", ex);
+    } catch (JsonSyntaxException ex) {
+      Logger.getLogger(getClass().getName()).log(Level.INFO, "Could not deserialze config file", ex);
     }
     
     // Time to load our services and initialize them with a config
